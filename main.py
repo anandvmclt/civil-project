@@ -4,18 +4,21 @@
 from locale import normalize
 
 
-pci = 66
+pci = 37
 deflcetion = 0.73
-iri = 4.2
-cvpd = 2560
+iri = 4.9
+cvpd = 1912
 
 
 # Constant values
-w = {0.297, 0.247, 0.292, 0.163}
+w = {0.31, 0.273, 0.284, 0.133}
 
 # Step 4 onwards
 # Get fuzzy metrics from Give input & Graphs
 normalized_fuzzy_set = 0 # will get from fuzzy metrics
+
+
+
 # Step 5
 v = w * normalized_fuzzy_set
 
