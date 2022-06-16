@@ -5,14 +5,6 @@ from itertools import chain
 from graphs import xp, yp1, yp2, yp3, yp4, yp5, xd, yd1, yd2, yd3, yd4, yd5, xi, yi1, yi2, yi3, yi4, yi5, xc, yc1, yc2, yc3, yc4, yc5
 
 
-# Step 1 :  User Input
-# pci = 37
-# deflection = 0.73
-# iri = 4.9
-# cvpd = 1912
-
-#input_data = [37, 0.73, 4.9, 1912]
-
 # --------------------------* Starting Calculations*---------------------------------
 
 # General Function for Normalize a raw Matrics ( Accept list as input)
@@ -112,5 +104,5 @@ def fahp_project(input_data):
     return FPCI[0][0]
 
 
-opz = fahp_project([37, 0.73, 4.9, 1912])
-print(opz)
+# opz = fahp_project([37, 0.73, 4.9, 1912])
+# print(opz)
