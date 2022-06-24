@@ -80,6 +80,23 @@ def fahp_project(input_data):
         print(ex)
 
 
+    # Writing Plotted values from graph to a matrics
+    fx = open("fuzzy_set.txt", "w")
+    pcif = "PCI : " + str(pci_row_matrics)
+    defcletionf = "Deflection : "+ str(deflection_row_matrics)
+    irif = "IRI : " + str(iri_row_matrics)
+    cvpdf = "CVPD : " + str(cvpd_row_matrics) 
+    fx.write('\n')
+    fx.write(pcif)
+    fx.write('\n')
+    fx.write(defcletionf)
+    fx.write('\n')
+    fx.write(irif)
+    fx.write('\n')
+    fx.write(cvpdf)
+    fx.write('\n')
+    fx.close()
+
     # Step 2 : normailize step 1 values
     pci_norm = normalize_matrics(pci_row_matrics)
     deflection_norm = normalize_matrics(deflection_row_matrics)
@@ -101,7 +118,8 @@ def fahp_project(input_data):
     final_const_raw = np.array([final_const])
     vx_transformed = vx.T
     FPCI = final_const_raw.dot(vx_transformed)
-    return FPCI[0][0]
+    final_answer = {"fuzzy_set":"", "fpci":FPCI[0][0] }
+    return final_answer
 
 
 # opz = fahp_project([37, 0.73, 4.9, 1912])
