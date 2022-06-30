@@ -8,8 +8,8 @@ def submitData():
     pci_info = pci.get()
     deflection_info = deflection.get()
     iri_info = iri.get()
-    cvpd_info = cvpd.get()
-    result = fahp_project([pci_info, deflection_info, iri_info, cvpd_info])
+    # cvpd_info = cvpd.get()
+    result = fahp_project([pci_info, deflection_info, iri_info])
     fpci = result['fpci']
     fuzzy_set = result['fuzzy_set']
     # label1 = Label(screen, text="Input Data : " + str(fuzzy_set), fg="red", font = ('Helvetica', 16, 'bold'))
@@ -31,12 +31,12 @@ def main_screen():
     global pci
     global deflection
     global iri
-    global cvpd
+    # global cvpd
 
     pci = tk.StringVar()
     deflection = tk.StringVar()
     iri = tk.StringVar()
-    cvpd = tk.StringVar()
+    # cvpd = tk.StringVar()
     remarks = "Demo user"
 
     Label(screen, text="Please enter details Below").pack()
@@ -47,8 +47,8 @@ def main_screen():
     deflection_entry = Entry(screen, textvariable=deflection).pack()
     Label(screen, text="IRI :").pack()
     iri_entry = Entry(screen, textvariable=iri).pack()
-    Label(screen, text="CVPD").pack()
-    cvpd_entry = Entry(screen, textvariable=cvpd).pack()
+    # Label(screen, text="CVPD").pack()
+    # cvpd_entry = Entry(screen, textvariable=cvpd).pack()
     Label(screen, text="").pack()
 
 
