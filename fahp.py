@@ -39,7 +39,7 @@ def fahp_project(input_data):
     pci_row_matrics = []
     deflection_row_matrics = []
     iri_row_matrics = []
-    # cvpd_row_matrics = []
+    cvpd_row_matrics = []
 
     try:
         pci_row_matrics.append(round(np.interp(input_data[0], xp, yp1), 3))
@@ -70,14 +70,14 @@ def fahp_project(input_data):
         print(ex)
 
 
-    # try:
-    #     cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc1), 3))
-    #     cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc2), 3))
-    #     cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc3), 3))
-    #     cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc4), 3))
-    #     cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc5), 3))
-    # except Exception as ex:
-    #     print(ex)
+    try:
+        cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc1), 3))
+        cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc2), 3))
+        cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc3), 3))
+        cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc4), 3))
+        cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc5), 3))
+    except Exception as ex:
+        print(ex)
 
 
     # Writing Plotted values from graph to a matrics
@@ -85,7 +85,7 @@ def fahp_project(input_data):
     pcif = "PCI : " + str(pci_row_matrics)
     defcletionf = "Deflection : "+ str(deflection_row_matrics)
     irif = "IRI : " + str(iri_row_matrics)
-    # cvpdf = "CVPD : " + str(cvpd_row_matrics) 
+    cvpdf = "CVPD : " + str(cvpd_row_matrics) 
     fx.write('\n')
     fx.write(pcif)
     fx.write('\n')
@@ -93,16 +93,16 @@ def fahp_project(input_data):
     fx.write('\n')
     fx.write(irif)
     fx.write('\n')
-    # fx.write(cvpdf)
-    # fx.write('\n')
+    fx.write(cvpdf)
+    fx.write('\n')
     fx.close()
 
     # Step 2 : normailize step 1 values
     pci_norm = normalize_matrics(pci_row_matrics)
     deflection_norm = normalize_matrics(deflection_row_matrics)
     iri_norm = normalize_matrics(iri_row_matrics)
-    # cvpd_norm = normalize_matrics(cvpd_row_matrics)
-    sum_of_normalized_raws = [pci_norm , deflection_norm, iri_norm]
+    cvpd_norm = normalize_matrics(cvpd_row_matrics)
+    sum_of_normalized_raws = [pci_norm , deflection_norm, iri_norm, cvpd_norm]
 
 
 
