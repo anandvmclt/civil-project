@@ -11,9 +11,10 @@ def submitData():
     # cvpd_info = cvpd.get()
     result = fahp_project([pci_info, deflection_info, iri_info])
     fpci = result['fpci']
+    answer = round(fpci,4)
     fuzzy_set = result['fuzzy_set']
     # label1 = Label(screen, text="Input Data : " + str(fuzzy_set), fg="red", font = ('Helvetica', 16, 'bold'))
-    label2 = Label(screen, text="Result is : " + str(fpci), fg="green", font = ('Helvetica', 18, 'bold'))
+    label2 = Label(screen, text="Result is : " + str(answer), fg="green", font = ('Helvetica', 18, 'bold'))
     # label1.pack()
     label2.pack()
 
