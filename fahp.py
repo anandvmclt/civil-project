@@ -33,20 +33,21 @@ def fahp_project(input_data):
         data = json.load(file)
         wz = data['wz']
         final_const = data['final_const']
+        print("Given constants : wz = ", wz, "final constant = ", final_const)
     except Exception as ex:
         print("Exp:", ex)
     # Get corresponding values from Graph for each items
     pci_row_matrics = []
     deflection_row_matrics = []
     iri_row_matrics = []
-    # cvpd_row_matrics = []
+    cvpd_row_matrics = []
 
     try:
-        pci_row_matrics.append(round(np.interp(input_data[0], xp, yp1), 3))
-        pci_row_matrics.append(round(np.interp(input_data[0], xp, yp2), 3))
-        pci_row_matrics.append(round(np.interp(input_data[0], xp, yp3), 3))
-        pci_row_matrics.append(round(np.interp(input_data[0], xp, yp4), 3))
         pci_row_matrics.append(round(np.interp(input_data[0], xp, yp5), 3))
+        pci_row_matrics.append(round(np.interp(input_data[0], xp, yp4), 3))
+        pci_row_matrics.append(round(np.interp(input_data[0], xp, yp3), 3))
+        pci_row_matrics.append(round(np.interp(input_data[0], xp, yp2), 3))
+        pci_row_matrics.append(round(np.interp(input_data[0], xp, yp1), 3))
     except Exception as ex:
         print(ex)
 
@@ -70,14 +71,14 @@ def fahp_project(input_data):
         print(ex)
 
 
-    # try:
-    #     cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc1), 3))
-    #     cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc2), 3))
-    #     cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc3), 3))
-    #     cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc4), 3))
-    #     cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc5), 3))
-    # except Exception as ex:
-    #     print(ex)
+    try:
+        cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc1), 3))
+        cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc2), 3))
+        cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc3), 3))
+        cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc4), 3))
+        cvpd_row_matrics.append(round(np.interp(input_data[3], xc, yc5), 3))
+    except Exception as ex:
+        print(ex)
 
 
     # Writing Plotted values from graph to a matrics
@@ -85,7 +86,7 @@ def fahp_project(input_data):
     pcif = "PCI : " + str(pci_row_matrics)
     defcletionf = "Deflection : "+ str(deflection_row_matrics)
     irif = "IRI : " + str(iri_row_matrics)
-    # cvpdf = "CVPD : " + str(cvpd_row_matrics) 
+    cvpdf = "CVPD : " + str(cvpd_row_matrics) 
     fx.write('\n')
     fx.write(pcif)
     fx.write('\n')
@@ -93,34 +94,49 @@ def fahp_project(input_data):
     fx.write('\n')
     fx.write(irif)
     fx.write('\n')
-    # fx.write(cvpdf)
-    # fx.write('\n')
+    fx.write(cvpdf)
+    fx.write('\n')
     fx.close()
+
+    print(pcif)
+    print(defcletionf)
+    print(irif)
+    print(cvpdf)
 
     # Step 2 : normailize step 1 values
     pci_norm = normalize_matrics(pci_row_matrics)
     deflection_norm = normalize_matrics(deflection_row_matrics)
     iri_norm = normalize_matrics(iri_row_matrics)
-    # cvpd_norm = normalize_matrics(cvpd_row_matrics)
-    sum_of_normalized_raws = [pci_norm , deflection_norm, iri_norm]
-
+    cvpd_norm = normalize_matrics(cvpd_row_matrics)
+    sum_of_normalized_raws = [pci_norm , deflection_norm, iri_norm, cvpd_norm]
+    print("Sum of Normalized rows :", sum_of_normalized_raws)
 
 
     # Step 3 : Constant values
     nm = sum_of_normalized_raws
+    print("Constant values : Sum of Normalized rows ")
 
     # step 4 : Multiplying Normalized matrics into a Constant Raw
     M1 = np.array([wz])
     M2 = np.array(nm)
     vx = M1.dot(M2)  
+    print("Multiplying Normalized matrics into a Constant Raw")
+    print("M1 :", M1)
+    print("M2 :", M2)
+    print("vx = M1.M2 :", vx)
 
     # step 5 : Multiplying above anser with into a Constant Raw matric
     final_const_raw = np.array([final_const])
     vx_transformed = vx.T
     FPCI = final_const_raw.dot(vx_transformed)
     final_answer = {"fuzzy_set":"", "fpci":FPCI[0][0] }
+
+    print("Multiplying above anser with into a Constant Raw matric")
+    print("Final constant raw :", final_const_raw)
+    print(" Transformed Matric :", vx_transformed)
+    print("FPCI = Final constant raw x Transformed Matric")
+    print("Final Answer :", final_answer)
+    
     return final_answer
-
-
 # opz = fahp_project([37, 0.73, 4.9, 1912])
 # print(opz)
