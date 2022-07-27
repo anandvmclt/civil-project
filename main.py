@@ -9,6 +9,8 @@ def submitData():
     deflection_info = deflection.get()
     iri_info = iri.get()
     cvpd_info = cvpd.get()
+    print("Calculation started !")
+    print("Input Values :",[pci_info, deflection_info, iri_info, cvpd_info])
     result = fahp_project([pci_info, deflection_info, iri_info, cvpd_info])
     fpci = result['fpci']
     answer = round(fpci,4)
